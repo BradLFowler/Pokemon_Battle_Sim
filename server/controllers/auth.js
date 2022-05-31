@@ -8,7 +8,7 @@ const { handleSQLError } = require('../sql/error')
 const signup = (req, res) => {
 
     const { username, password } = req.body
-    let sql = "INSERT INTO (username, password, created_at) VALUES (?, ?, ?)"
+    let sql = "INSERT INTO users(username, password, created_at) VALUES (?, ?, ?)"
 
     const hash = argon2.hash(password)
 

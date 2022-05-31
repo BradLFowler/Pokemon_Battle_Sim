@@ -6,8 +6,8 @@ router.get('/', usersController.greetUsers)
 
 router.get('/:username', usersController.usersInfo)
 
-// router.put('/:username', usersController.changeUName)
+router.put('/:username', usersController.changeUName)
 
-// router.put('/:password', usersController.changePassword)
+router.put('/:password', usersController.changePassword)
 
 module.exports = router
