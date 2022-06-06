@@ -10,13 +10,15 @@ const greetUsers = (req, res) => {
 }
 
 const usersInfo = (req, res) => {
+    const { password } = req.body
 
     let sql = "SELECT * FROM users WHERE username = ?"
     sql = mysql.format(sql, [req.params.username])
 
-    pool.query(sql, (err, rows) => {
+    pool.query(sql, (err, results) => {
         if(err) return handleSQLError(res, err)
-        return res.send(rows)
+        results[0].password = password
+        return res.send(results)
     })
 }
 
@@ -27,23 +29,23 @@ const changeUName = (req, res) => {
     let sql = "UPDATE users SET username = ? WHERE username = ?"
     sql = mysql.format(sql, [username, req.params.username])
 
-    pool.query(sql, (err, rows) => {
+    pool.query(sql, (err, results) => {
         if(err) return handleSQLError(res, err)
         return res.send(`Changed Username to:${username}`)
     })
 }
 
-const changePassword = (req, res) => {
+const changePassword = async (req, res) => {
 
     const { password } = req.body
 
-    const hash = argon2.hash(password)
+    const hash = await argon2.hash(password, {type: argon2.argon2i})
 
     let sql = "UPDATE users SET password = ? WHERE username = ?"
-    sql = mysql.format(sql, [hash, req.params.password])
+    sql = mysql.format(sql, [hash, req.params.username])
 
-    pool.query(sql, (err, rows) => {
-        if(err) return handleSQLError(res, rows)
+    pool.query(sql, (err, results) => {
+        if(err) return handleSQLError(res, results)
         return res.send(`Changed Password`)
     })
 }

@@ -1,5 +1,5 @@
-// needs jwt
-// const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
+require('dotenv').config()
 
 const logger = (req, res, next) => {
   console.log(`${req.originalUrl} ${new Date().toISOString()}`)
@@ -11,7 +11,7 @@ const authenticate = (req, res, next) => {
   const [ bearer, token ] = header.split(' ')
 
   try {
-    const decoded = jwt.verify(token, 'secret')
+    const decoded = jwt.verify(token, process.env.TOKEN_SECRET)
     req.user = decoded
     next()
   } catch(err) {
@@ -20,6 +20,6 @@ const authenticate = (req, res, next) => {
 }
 
 module.exports = {
-  logger,
-  authenticate
+  authenticate,
+  logger
 }
