@@ -19,11 +19,12 @@ const signup = async (req, res) => {
         const hash = await argon2.hash(password, {type: argon2.argon2i})
         sql = mysql.format(sql, [username, hash, date])
         
-        // need to make sure users can't have the same name
-        pool.query(sql, (err, results) => {
+        // need to make sure users can't have the same name !!!
+        pool.query(sql, async (err, results) => {
+
             if(err) {
-                if(err.code === 'ER_DUP_ENTRY') return res.status(409).send('Username is taken')
-                return handleSQLError(res, err)
+                if(err.code === "ER_DUP_ENTRY") return res.status(409).send('Username is taken')
+                return handleSQLError(results, err)
             }
             return res.send(`Thanks for Signing Up ${username}`)
         })
@@ -45,7 +46,7 @@ const login = (req, res) => {
     try {
         pool.query(sql, async (err, results) => {
             
-            if(err) return handleSQLError(res, err)
+            if(err) return handleSQLError(results, err)
 
             if(!results.length) return res.status(404).send("No matching users")
             

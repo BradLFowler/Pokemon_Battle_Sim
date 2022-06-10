@@ -11,4 +11,6 @@ router.put('/username/:username', authenticate, usersController.changeUName)
 
 router.put('/password/:username', authenticate, usersController.changePassword)
 
+router.delete('/delete', authenticate, usersController.deleteUser)
+
 module.exports = router
