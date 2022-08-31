@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
-import Router from './src/Router'
+import Router from './Router'
 
-import App from './src/App';
+import App from './App';
 
 import './App.css';
 
