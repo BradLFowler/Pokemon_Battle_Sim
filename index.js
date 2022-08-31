@@ -1,21 +1,19 @@
-const express = require('express')
-const authRouter = require('./server/routes/auth')
-const usersRouter = require('./server/routes/users')
-const { logger } = require('./server/middleware/middleware')
-// need dotenv.config()
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 
-const app = express();
-app.use(express.json())
-const port = 3001;
+import Router from './src/Router'
 
-app.get('/', logger, (req, res) => {
-    res.send('Welcome')
-})
+import App from './src/App';
 
-app.use('/auth', logger, authRouter)
+import './App.css';
 
-app.use('/users', logger, usersRouter)
-
-app.listen(port, () => {
-    console.log(`Listening on port:${port}`)
-})
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <BrowserRouter>
+    <React.StrictMode>
+      <Router />
+      <App />
+    </React.StrictMode>
+  </BrowserRouter>
+);
