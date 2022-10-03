@@ -1,3 +1,70 @@
 body {
     background-image: url('../public/pokebattlebackg.jpg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: black;
+}
+
+.LSContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 10%;
+}
+
+.sContainer, .lContainer {
+    height: 250px;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.sButton, .lButton {
+    position: absolute;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    margin-left: 2px;
+    border-color: white;
+}
+
+.sButton {
+    padding-right: 43px;
+    margin-left: 2px;
+}
+
+.textField {
+    background-color: white;
+}
+
+.formContainer {
+    display: flex !important;
+    flex-direction: column;
+    margin-top: 80px;
+    gap: 70px;
+    margin-left: 31%;
+}
+
+.submit {
+    background-color: white !important;
+    color: black !important;
+    width: 300px;
+    align-self: center;
+}
+
+.pokeContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.pokemon > img {
+    background-color: white;
+    height: 200px;
+    width: 200px;
 }
